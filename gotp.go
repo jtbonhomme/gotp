@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// TimeIntervaleSeed is the default time intervale seed used to compute the HOTP.
-const TimeIntervaleSeed int64 = 30
+// TimeIntervalSeed is the default time interval seed used to compute the HOTP.
+const TimeIntervalSeed int64 = 30
 
 // Append extra 0s if the length of otp is less than 6
 // If otp is "1234", it will return it as "001234"
@@ -69,10 +69,10 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 	return prefix0(otp), nil
 }
 
-// TOTPToken compute a time-based one-time token from a secret.
+// TOTPToken computes a time-based one-time token from a secret.
 // The time interval seed is 30 seconds.
-// See TimeIntervaleSeed.
+// See TimeIntervalSeed.
 func TOTPToken(secret []byte) (string, error) {
-	interval := time.Now().Unix() / TimeIntervaleSeed
+	interval := time.Now().Unix() / TimeIntervalSeed
 	return getHOTPToken(string(secret), interval)
 }
