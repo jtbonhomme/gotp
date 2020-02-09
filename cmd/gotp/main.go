@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/jedib0t/go-pretty/table"
 	"github.com/jtbonhomme/gotp/backend/secure"
 )
 
@@ -37,10 +38,15 @@ func main() {
 		// fetch stored codes
 		codes, err := secring.List()
 		check(err)
-		for _, code := range *codes {
-			fmt.Printf("Key: %s\n", code.Key)
-			fmt.Printf("\t=> Secret: %s\n\n", code.Code)
+		t := table.NewWriter()
+		t.SetOutputMirror(os.Stdout)
+		t.AppendHeader(table.Row{"#", "Key", "Time-based OTP"})
+
+		for i, code := range *codes {
+			t.AppendRow([]interface{}{i + 1, code.Key, code.Code})
 		}
+		t.SetStyle(table.StyleColoredBright)
+		t.Render()
 	case "add":
 		err := addCmd.Parse(os.Args[2:])
 		check(err)
