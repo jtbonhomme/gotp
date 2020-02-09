@@ -8,4 +8,6 @@ type Backend interface {
 	List() (*[]gotp.TOTP, error)
 	// Store adds a new key in the backend
 	Store(string, string) error
+	// Remove deletes a new key in the backend
+	Remove(string) error
 }

@@ -20,7 +20,10 @@ func main() {
 	err := rd.Store("myServiceURI", "KZAUYVKFGM======")
 	check(err)
 	// fetch random fake codes
-	keys, err := rd.List()
+	codes, err := rd.List()
 	check(err)
-	fmt.Printf("keys: %#v\n", keys)
+	for _, code := range *codes {
+		fmt.Printf("Key: %s\n", code.Key)
+		fmt.Printf("\t=> Seret: %s\n", code.Code)
+	}
 }

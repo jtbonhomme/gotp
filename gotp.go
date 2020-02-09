@@ -28,8 +28,8 @@ func prefix0(otp string) string {
 
 // getHOTPToken computes a HOTP from a secret and an intervale.
 func getHOTPToken(secret string, interval int64) (string, error) {
-	//Converts secret to base32 Encoding. Base32 encoding desires a 32-character
-	//subset of the twenty-six letters A–Z and ten digits 0–9
+	// Converts secret to base32 Encoding. Base32 encoding desires a 32-character
+	// subset of the twenty-six letters A–Z and ten digits 0–9
 	key, err := base32.StdEncoding.DecodeString(strings.ToUpper(secret))
 	if err != nil {
 		return "", err
@@ -37,7 +37,7 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 	bs := make([]byte, 8)
 	binary.BigEndian.PutUint64(bs, uint64(interval))
 
-	//Signing the value using HMAC-SHA1 Algorithm
+	// Signing the value using HMAC-SHA1 Algorithm
 	hash := hmac.New(sha1.New, key)
 	hash.Write(bs)
 	h := hash.Sum(nil)
@@ -49,18 +49,18 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 	o := (h[19] & 15)
 
 	var header uint32
-	//Get 32 bit chunk from hash starting at the o
+	// Get 32 bit chunk from hash starting at the o
 	r := bytes.NewReader(h[o : o+4])
 	err = binary.Read(r, binary.BigEndian, &header)
 	if err != nil {
 		return "", err
 	}
 
-	//Ignore most significant bits as per RFC 4226.
-	//Takes division from one million to generate a remainder less than < 7 digits
+	// Ignore most significant bits as per RFC 4226.
+	// Takes division from one million to generate a remainder less than < 7 digits
 	h12 := (int(header) & 0x7fffffff) % 1000000
 
-	//Converts number as a string
+	// Converts number as a string
 	otp := strconv.Itoa(int(h12))
 
 	return prefix0(otp), nil
@@ -69,7 +69,7 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 // TOTPToken compute a time-based one-time token from a secret.
 // The time intervale seed is 30 seconds.
 // See TimeIntervaleSeed.
-func TOTPToken(secret string) (string, error) {
+func TOTPToken(secret []byte) (string, error) {
 	interval := time.Now().Unix() / TimeIntervaleSeed
-	return getHOTPToken(secret, interval)
+	return getHOTPToken(string(secret), interval)
 }
