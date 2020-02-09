@@ -1,6 +1,6 @@
 # gotp
 
-![GitHub version](https://img.shields.io/badge/gotp%20version-0.2.3-blue.svg)
+![GitHub version](https://img.shields.io/badge/gotp%20version-0.2.4-blue.svg)
 
 [![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](https://godoc.org/github.com/jtbonhomme/gotp)
 
