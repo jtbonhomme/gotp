@@ -14,8 +14,8 @@ import (
 // TimeIntervaleSeed is the default time intervale seed used to compute the HOTP.
 const TimeIntervaleSeed int64 = 30
 
-//Append extra 0s if the length of otp is less than 6
-//If otp is "1234", it will return it as "001234"
+// Append extra 0s if the length of otp is less than 6
+// If otp is "1234", it will return it as "001234"
 func prefix0(otp string) string {
 	if len(otp) == 6 {
 		return otp
@@ -26,7 +26,7 @@ func prefix0(otp string) string {
 	return otp
 }
 
-// getHOTPToken computes a HOTP from a secret and an intervale.
+// getHOTPToken computes a HOTP from a secret and an interval.
 func getHOTPToken(secret string, interval int64) (string, error) {
 	// Converts secret to base32 Encoding. Base32 encoding desires a 32-character
 	// subset of the twenty-six letters A–Z and ten digits 0–9
@@ -39,7 +39,10 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 
 	// Signing the value using HMAC-SHA1 Algorithm
 	hash := hmac.New(sha1.New, key)
-	hash.Write(bs)
+	_, err = hash.Write(bs)
+	if err != nil {
+		return "", err
+	}
 	h := hash.Sum(nil)
 
 	// We're going to use a subset of the generated hash.
@@ -61,13 +64,13 @@ func getHOTPToken(secret string, interval int64) (string, error) {
 	h12 := (int(header) & 0x7fffffff) % 1000000
 
 	// Converts number as a string
-	otp := strconv.Itoa(int(h12))
+	otp := strconv.Itoa(h12)
 
 	return prefix0(otp), nil
 }
 
 // TOTPToken compute a time-based one-time token from a secret.
-// The time intervale seed is 30 seconds.
+// The time interval seed is 30 seconds.
 // See TimeIntervaleSeed.
 func TOTPToken(secret []byte) (string, error) {
 	interval := time.Now().Unix() / TimeIntervaleSeed

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/jtbonhomme/gotp"
 )
@@ -40,6 +41,9 @@ func New(kr string) *Random {
 // List lists all keys stored in the backend
 func (rd *Random) List() (*[]gotp.TOTP, error) {
 	var totps []gotp.TOTP
+	interval := time.Now().Unix() / gotp.TimeIntervaleSeed
+	fmt.Printf("Interval: %d\n", interval)
+
 	for _, key := range rd.keys {
 		code, err := gotp.TOTPToken([]byte(key.Value))
 		if err != nil {

@@ -4,6 +4,9 @@ Golang secure storage for your 2FA secret from your terminal.
 
 ![](gopher.png)
 
+`gotp` has only been tested on Mac OS X (Mojave).
+It requires specific installation to be used with `pass` on Minux.
+
 # Context
 
 Modern web services offer a 2-factor authentication as a complement of the traditional login/password method. This brings an additional security level, based on the Time-based One-Time Password (TOTP), because even if a user's traditional password is stolen or compromised, an attacker cannot gain access without the TOTP, which expires quickly.
@@ -55,11 +58,15 @@ gotp list
 gotp del -key=gmail
 ```
 
+# The secure KeyChain
+
+`gotp` uses the [keyring](https://godoc.org/github.com/99designs/keyring) library to store the 
+
 # Todo
 
 - [ ] Add an update function, to change key name
 - [ ] Add a copy to clipboard function
-- [ ] Add tests
+- [ ] Add tests on different OS.
 
 # Contributing
 
