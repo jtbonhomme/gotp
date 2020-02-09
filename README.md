@@ -1,8 +1,8 @@
 # gotp
 
-[![GitHub version](https://badge.fury.io/gh/conventional-changelog%2Fstandard-version.svg)](https://badge.fury.io/gh/conventional-changelog%2Fstandard-version)
+![GitHub version](https://img.shields.io/badge/gotp%20version-0.2.2-blue.svg)
 
-[![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](http://godoc.org/github.com/jtbonhomme/gotp)
+[![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](https://godoc.org/github.com/jtbonhomme/gotp)
 
 Golang secure storage for your 2FA secret from your terminal.
 
