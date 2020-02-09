@@ -15,7 +15,7 @@ const keyringSize int = 5
 // Random is a backend used for tests. It generates 5 random keys at startup.
 type Random struct {
 	keyring string
-	keys    []gotp.Key
+	keys    []gotp.Secret
 }
 
 // New creates a new backend instance.
@@ -27,12 +27,13 @@ func New(kr string) *Random {
 
 	for i := 0; i < keyringSize; i++ {
 		secret := base32.StdEncoding.EncodeToString([]byte(strings.ToUpper(fmt.Sprintf("value%d", i))))
-		key := gotp.Key{
-			key:   fmt.Sprintf("key%d", i),
+		key := gotp.Secret{
+			Key:   fmt.Sprintf("key%d", i),
 			Value: secret,
 		}
 		rd.keys = append(rd.keys, key)
 	}
+	fmt.Printf("Populated keyring with %+v\n", rd)
 	return &rd
 }
 
@@ -45,7 +46,7 @@ func (rd *Random) List() (*[]gotp.TOTP, error) {
 			return &totps, err
 		}
 		totp := gotp.TOTP{
-			Key:  key.key,
+			Key:  key.Key,
 			Code: code,
 		}
 		totps = append(totps, totp)

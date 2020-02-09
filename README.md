@@ -12,6 +12,8 @@ The TOTP specification (RFC-6238) describes the TOTP algorithm, as an time-based
 
 The TOTP is basicaly a hash-mac token computed from a shared key (generaly randomky generated) and seed with a 30-second valid timestamp. Lot's of mobile applications can provide such a service (Google Authenticator, ...)
 
+![](ga.png)
+
 When you wish to log into a 2FA protected service, you are asked to provide your credentials (login/password) then to enter the TOTP displayed on the application.
 The web service computed the same TOTP and make sure they are equal.
 
@@ -31,15 +33,31 @@ go get -u github.com/jtbonhomme/gotp/cmd/gotp
 
 ## Add a key
 
+The shared secret shall be in the base-32 format.
+
+```sh
+gotp add -key=gmail -value=KZAUYVKFGA======
+```
+
 ## List all keys
 
+```sh
+gotp list
+```
+
+![](gotp.png)
+
 ## Delete a key
+
+```sh
+gotp del -key=gmail
+```
 
 # Todo
 
 - [ ] Add an update function, to change key name
 - [ ] Add a copy to clipboard function
-- [ ] More tests
+- [ ] Add tests
 
 # Contributing
 
