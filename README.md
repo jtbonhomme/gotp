@@ -2,6 +2,8 @@
 
 Golang secure storage for your 2FA secret from your terminal.
 
+![](gopher.png)
+
 # Context
 
 Modern web services offer a 2-factor authentication as a complement of the traditional login/password method. This brings an additional security level, based on the Time-based One-Time Password (TOTP), because even if a user's traditional password is stolen or compromised, an attacker cannot gain access without the TOTP, which expires quickly.
