@@ -34,6 +34,10 @@ That day, I wish I had a backup solution on my laptop. Then I started to wonder 
 
 # Usage
 
+## Download
+
+Get the version for your OS here: [download](https://github.com/jtbonhomme/gotp/tree/master/dist)
+
 ## Install as a command line tool
 
 ```sh
