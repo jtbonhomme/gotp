@@ -26,4 +26,8 @@ func main() {
 		fmt.Printf("Key: %s\n", code.Key)
 		fmt.Printf("\t=> Seret: %s\n", code.Code)
 	}
+	// get one key
+	item, err := rd.Read("sample")
+	check(err)
+	fmt.Printf("Sample key: %+v\n", item)
 }

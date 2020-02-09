@@ -44,6 +44,15 @@ The shared secret shall be in the base-32 format.
 gotp add -key=gmail -value=KZAUYVKFGA======
 ```
 
+## Get a code
+
+The code read is copied to the clipboard.
+
+```
+gotp get -key=AWS
+code: 585146 (copied to clipboard)
+```
+
 ## List all keys
 
 ```sh
@@ -65,7 +74,6 @@ gotp del -key=gmail
 # Todo
 
 - [ ] Add an update function, to change key name
-- [ ] Add a copy to clipboard function
 - [ ] Add tests on different OS.
 
 # Contributing

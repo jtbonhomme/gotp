@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/atotto/clipboard"
 	"github.com/jedib0t/go-pretty/table"
 	"github.com/jtbonhomme/gotp/backend/secure"
 )
@@ -25,8 +26,11 @@ func main() {
 	delCmd := flag.NewFlagSet("del", flag.ExitOnError)
 	delKey := delCmd.String("key", "", "key")
 
+	getCmd := flag.NewFlagSet("get", flag.ExitOnError)
+	getKey := getCmd.String("key", "", "key")
+
 	if len(os.Args) < 2 {
-		fmt.Println("expected 'add', 'del' or 'list' subcommands")
+		fmt.Println("expected 'add', 'get', 'del' or 'list' subcommands")
 		os.Exit(1)
 	}
 
@@ -57,8 +61,17 @@ func main() {
 		check(err)
 		err = secring.Remove(*delKey)
 		check(err)
+	case "get":
+		err := getCmd.Parse(os.Args[2:])
+		check(err)
+		totp, err := secring.Read(*getKey)
+		check(err)
+		fmt.Printf("code: %s", totp.Code)
+		err = clipboard.WriteAll(totp.Code)
+		check(err)
+		fmt.Println(" (copied to clipboard)")
 	default:
-		fmt.Println("expected 'add', 'del' or 'list' subcommands")
+		fmt.Println("expected 'add', 'get', 'del' or 'list' subcommands")
 		os.Exit(1)
 	}
 }

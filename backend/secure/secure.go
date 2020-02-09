@@ -80,3 +80,25 @@ func (sec *Secure) Store(key, secret string) error {
 func (sec *Secure) Remove(key string) error {
 	return sec.keyring.Remove(key)
 }
+
+// Read retrieves a key stored in the backend
+func (sec *Secure) Read(key string) (*gotp.TOTP, error) {
+	var totp gotp.TOTP
+
+	item, err := sec.keyring.Get(key)
+	if err != nil {
+		return nil, err
+	}
+
+	code, err := gotp.TOTPToken(item.Data)
+	if err != nil {
+		return nil, err
+	}
+
+	totp = gotp.TOTP{
+		Key:  key,
+		Code: code,
+	}
+
+	return &totp, nil
+}
