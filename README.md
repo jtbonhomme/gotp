@@ -6,7 +6,7 @@
 
 Golang secure storage for your 2FA secret from your terminal.
 
-![](gopher.png)
+![](gotp.png)
 
 `gotp` has only been tested on Mac OS X (Mojave).
 It requires specific installation to be used with `pass` on Minux.
