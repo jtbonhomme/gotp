@@ -9,7 +9,7 @@ Golang secure storage for your 2FA secret from your terminal.
 ![](gotp.png)
 
 `gotp` has only been tested on Mac OS X (Mojave).
-It requires specific installation to be used with `pass` on Minux.
+It requires specific installation to be used with `pass` on Linux.
 
 # Context
 
