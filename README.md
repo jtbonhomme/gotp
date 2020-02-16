@@ -21,7 +21,7 @@ The TOTP specification (RFC-6238) describes the TOTP algorithm, as an time-based
 
 The TOTP is basicaly a hash-mac token computed from a shared key (generaly randomky generated) and seed with a 30-second valid timestamp. Lot's of mobile applications can provide such a service (Google Authenticator, ...)
 
-![](ga.png)
+![](ga.jpg)
 
 When you wish to log into a 2FA protected service, you are asked to provide your credentials (login/password) then to enter the TOTP displayed on the application.
 The web service computed the same TOTP and make sure they are equal.
