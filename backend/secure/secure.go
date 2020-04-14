@@ -20,9 +20,12 @@ type Secure struct {
 // New creates a new secure backend instance.
 // It takes as argument the name of the keyring to be created or opened.
 func New(kr string) *Secure {
-	ring, err := keyring.Open(keyring.Config{
+	kc := keyring.Config {
 		ServiceName: kr,
-	})
+		AllowedBackends: []keyring.BackendType{"keychain","pass"},
+		PassPrefix: kr,
+	}
+	ring, err := keyring.Open(kc)
 	if err != nil {
 		_ = fmt.Errorf("error while initialize key ring: %s", err.Error())
 		return nil
