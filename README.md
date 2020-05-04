@@ -44,6 +44,22 @@ Get the version for your OS here: [download](https://github.com/jtbonhomme/gotp/
 go get -u github.com/jtbonhomme/gotp/cmd/gotp
 ```
 
+## Linux - pass backend setup
+
+In order to use the pass backend, you need to initialize it and specify which GPG encryption
+identity to use. For further informations, see the pass manual.
+
+1 - find your GPG ID `gpg --list-secret-keys --keyid-format LONG`
+
+```
+uid                 [ultimate] you <you@rocks.com>
+ssb   rsa4096/DF5E537CC91EF1CA 2020-03-06 [E]
+```
+
+2 - initialize the backend `pass init  DF5E537CC91EF1CA`
+
+All secrets will be stored under the root folder `username:mfa`
+
 ## Add a key
 
 The shared secret shall be in the base-32 format.
