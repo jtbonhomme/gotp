@@ -1,0 +1,32 @@
+{
+  branches: ["master", "semver"],
+  repositoryUrl: "https://github.com/jtbonhomme/gotp",
+  verifyConditions: [
+    {
+      path: "@semantic-release/github"
+    }
+  ],
+  prepare: [
+    {
+      path: "@semantic-release/changelog",
+      changelogFile: 'docs/CHANGELOG.md'
+    },
+    {
+      path: "@semantic-release/git",
+      assets: ['docs/CHANGELOG.md']
+    }
+  ],
+  publish: [
+    {
+      path: "@semantic-release/github",
+      addReleases: true,
+      labels: ['semantic-release']
+    }
+  ],
+  success: false,
+  fail: false,
+  npmPublish: false,
+  tarballDir: false,
+  tagFormat: "${version}",
+  debug: false
+}
