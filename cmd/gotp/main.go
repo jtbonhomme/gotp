@@ -66,10 +66,9 @@ func main() {
 		check(err)
 		totp, err := secring.Read(*getKey)
 		check(err)
-		fmt.Printf("code: %s", totp.Code)
+		fmt.Printf("%s", totp.Code)
 		err = clipboard.WriteAll(totp.Code)
 		check(err)
-		fmt.Println(" (copied to clipboard)")
 	default:
 		fmt.Println("expected 'add', 'get', 'del' or 'list' subcommands")
 		os.Exit(1)
