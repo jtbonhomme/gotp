@@ -1,6 +1,10 @@
 # gotp
 
-![GitHub version](https://img.shields.io/badge/gotp%20version-0.2.4-blue.svg)
+[![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
+
+[![GoReportCard example](https://goreportcard.com/badge/github.com/jtbonhomme/gotp)](https://goreportcard.com/report/github.com/jtbonhomme/gotp)
+
+![GitHub version](https://img.shields.io/badge/gotp%20version-0.2.5-blue.svg)
 
 [![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](https://godoc.org/github.com/jtbonhomme/gotp)
 
