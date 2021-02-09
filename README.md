@@ -40,7 +40,7 @@ That day, I wish I had a backup solution on my laptop. Then I started to wonder 
 
 ## Download
 
-Get the version for your OS here: [download](https://github.com/jtbonhomme/gotp/tree/master/dist)
+Get the version for your OS here: [download](https://github.com/jtbonhomme/gotp/releases)
 
 ## Install as a command line tool
 
