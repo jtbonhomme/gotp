@@ -11,5 +11,7 @@ require (
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/pquerna/otp v1.3.0
+	github.com/stretchr/testify v1.3.0
 	github.com/vektra/mockery/v2 v2.6.0 // indirect
+	golang.org/x/tools v0.1.0 // indirect
 )

@@ -1,8 +1,9 @@
 package gotp
 
 import (
-	"github.com/jtbonhomme/gotp/backend"
 	"time"
+
+	"github.com/jtbonhomme/gotp/backend"
 	"github.com/pquerna/otp"
 	"github.com/pquerna/otp/totp"
 )
@@ -11,7 +12,7 @@ import (
 const DefaultTimeIntervalSeed uint = 30
 
 type GOTP struct {
-	backend backend.Backend
+	backend          backend.Backend
 	timeIntervalSeed uint
 }
 
@@ -19,7 +20,7 @@ type GOTP struct {
 func New(bkd backend.Backend) *GOTP {
 	return &GOTP{
 		timeIntervalSeed: DefaultTimeIntervalSeed,
-		backend: bkd,
+		backend:          bkd,
 	}
 }
 
