@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/99designs/keyring"
-	"github.com/jtbonhomme/gotp"
 )
 
 // Secure is a secure backend.
@@ -39,30 +38,8 @@ func New(kr string) *Secure {
 }
 
 // List gets all keys stored in the keychain backend
-func (sec *Secure) List() (*[]gotp.TOTP, error) {
-	var totps []gotp.TOTP
-	keys, err := sec.keyring.Keys()
-	if err != nil {
-		return nil, errors.New("can not fetch keyring keys: " + err.Error())
-	}
-
-	for _, key := range keys {
-		item, err := sec.keyring.Get(key)
-		if err != nil {
-			return nil, errors.New("can not get key " + key + " from keyring: " + err.Error())
-		}
-
-		code, err := gotp.TOTPToken(item.Data)
-		if err != nil {
-			return nil, errors.New("can not compute totp: " + err.Error())
-		}
-		totp := gotp.TOTP{
-			Key:  key,
-			Code: code,
-		}
-		totps = append(totps, totp)
-	}
-	return &totps, nil
+func (sec *Secure) List() ([]string, error) {
+	return sec.keyring.Keys()
 }
 
 // Store adds a new key in the keychain backend
@@ -85,23 +62,7 @@ func (sec *Secure) Remove(key string) error {
 }
 
 // Read retrieves a key stored in the backend
-func (sec *Secure) Read(key string) (*gotp.TOTP, error) {
-	var totp gotp.TOTP
-
+func (sec *Secure) Read(key string) ([]byte, error) {
 	item, err := sec.keyring.Get(key)
-	if err != nil {
-		return nil, err
-	}
-
-	code, err := gotp.TOTPToken(item.Data)
-	if err != nil {
-		return nil, err
-	}
-
-	totp = gotp.TOTP{
-		Key:  key,
-		Code: code,
-	}
-
-	return &totp, nil
+	return item.Data, err
 }

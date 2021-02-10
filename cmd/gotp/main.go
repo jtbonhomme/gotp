@@ -8,6 +8,7 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/jedib0t/go-pretty/table"
 	"github.com/jtbonhomme/gotp/backend/secure"
+	"github.com/jtbonhomme/gotp"
 )
 
 // panics if error is not nil
@@ -34,40 +35,38 @@ func main() {
 		os.Exit(1)
 	}
 
-	// create the key ring
-	secring := secure.New(user + ":mfa")
+	// create the GoTP based from secured key ring
+	gotp := gotp.New(secure.New(user + ":mfa"))
 
 	switch os.Args[1] {
 	case "list":
-		// fetch stored codes
-		codes, err := secring.List()
+		codes, err := gotp.List()
 		check(err)
 		t := table.NewWriter()
 		t.SetOutputMirror(os.Stdout)
-		t.AppendHeader(table.Row{"#", "Key", "Time-based OTP"})
-
-		for i, code := range *codes {
-			t.AppendRow([]interface{}{i + 1, code.Key, code.Code})
+		t.AppendHeader(table.Row{"#", "Key"})
+		for i, code := range codes {
+			t.AppendRow([]interface{}{i + 1, code})
 		}
 		t.SetStyle(table.StyleColoredBright)
 		t.Render()
 	case "add":
 		err := addCmd.Parse(os.Args[2:])
 		check(err)
-		err = secring.Store(*addKey, *addValue)
+		err = gotp.Store(*addKey, *addValue)
 		check(err)
 	case "del":
 		err := delCmd.Parse(os.Args[2:])
 		check(err)
-		err = secring.Remove(*delKey)
+		err = gotp.Remove(*delKey)
 		check(err)
 	case "get":
 		err := getCmd.Parse(os.Args[2:])
 		check(err)
-		totp, err := secring.Read(*getKey)
+		totp, err := gotp.Get(*getKey)
 		check(err)
-		fmt.Printf("%s", totp.Code)
-		err = clipboard.WriteAll(totp.Code)
+		fmt.Printf("%s", totp)
+		err = clipboard.WriteAll(totp)
 		check(err)
 	default:
 		fmt.Println("expected 'add', 'get', 'del' or 'list' subcommands")
