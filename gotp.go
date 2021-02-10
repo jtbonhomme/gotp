@@ -8,17 +8,28 @@ import (
 )
 
 // DefaultTimeIntervalSeedTimeIntervalSeed is the default time interval seed used to compute the HOTP.
-const DefaultTimeIntervalSeed int64 = 30
+const DefaultTimeIntervalSeed uint = 30
 
 type GOTP struct {
 	secRing *secure.Secure
+	timeIntervalSeed uint
 }
 
+// New instanciates a GoTP object with a secured backend
 func New(secring *secure.Secure) *GOTP {
-	// create the key ring
 	return &GOTP{
+		timeIntervalSeed: DefaultTimeIntervalSeed,
 		secRing: secring,
 	}
+}
+
+// WithTimeIntervalSeed configures a specific timeIntervalSeed
+func (gotp *GOTP) WithTimeIntervalSeed(interval uint) *GOTP {
+	g := &GOTP{}
+	*g = *gotp
+
+	g.timeIntervalSeed = interval
+	return g
 }
 
 // List retrieves all existing keys in the secured key ring
@@ -43,7 +54,7 @@ func (gotp *GOTP) Get(key string) (string, error) {
 		return "", err
 	}
 	return totp.GenerateCodeCustom(string(secret), time.Now(), totp.ValidateOpts{
-		Period:    30,
+		Period:    gotp.timeIntervalSeed,
 		Skew:      1,
 		Digits:    otp.DigitsSix,
 		Algorithm: otp.AlgorithmSHA1,

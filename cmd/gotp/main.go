@@ -63,7 +63,9 @@ func main() {
 	case "get":
 		err := getCmd.Parse(os.Args[2:])
 		check(err)
-		totp, err := gotp.Get(*getKey)
+		totp, err := gotp.
+			WithTimeIntervalSeed(30).
+			Get(*getKey)
 		check(err)
 		fmt.Printf("%s", totp)
 		err = clipboard.WriteAll(totp)
