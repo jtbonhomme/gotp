@@ -17,3 +17,6 @@ gotp
 
 node_modules
 .DS_Store
+
+cover.html
+cover.xml

@@ -103,11 +103,12 @@ linters:
     - unparam
     - varcheck
     - whitespace
+    - bodyclose
+    - unused
+    - gochecknoglobals
 
   # don't enable:
   # - asciicheck
-  # - bodyclose
-  # - gochecknoglobals
   # - gocognit
   # - godot
   # - godox
@@ -116,7 +117,6 @@ linters:
   # - nestif
   # - prealloc
   # - testpackage
-  # - unused
   # - wsl
 
 issues:

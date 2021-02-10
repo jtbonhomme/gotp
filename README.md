@@ -8,6 +8,8 @@
 
 [![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](https://godoc.org/github.com/jtbonhomme/gotp)
 
+![gopherbadger-tag-do-not-edit](https://github.com/jtbonhomme/gotp/blob/master/coverage_badge.png)
+
 Golang secure storage for your 2FA secret from your terminal.
 
 ![](gotp.png)
@@ -36,7 +38,7 @@ I started using this security feature long time ago, and was happy using the Goo
 
 That day, I wish I had a backup solution on my laptop. Then I started to wonder how I could implement a desktop application with a secure storage backend.
 
-# Usage
+# Use gotp as a program
 
 ## Download
 
@@ -97,7 +99,7 @@ gotp del -key=gmail
 
 # The secure KeyChain
 
-`gotp` uses the [keyring](https://godoc.org/github.com/99designs/keyring) library to store the 
+`gotp` uses the [keyring](https://godoc.org/github.com/99designs/keyring) library to securely store the secret used to compute Time based OTP.
 
 # Todo
 
@@ -107,6 +109,25 @@ gotp del -key=gmail
 # Contributing
 
 `gotp` accepts Pull Requests! Feel free to add your own features, improve documentation or add tests.
+
+## Run tests
+
+```sh
+$ make test
+```
+
+## Execute github actions locally
+
+You can use [act](https://github.com/nektos/act) to execute locally your github actions. This tool relies on docker to run workflow jobs.
+
+```sh
+$ act -l
+ID       Stage  Name              
+build    0      GoReleaser build
+release  0      Semver release
+test     0      test
+$ act -j test
+```
 
 # References
 

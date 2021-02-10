@@ -1,11 +1,11 @@
-name: Release
+name: Semantic versioning
 on:
   push:
     branches:
       - master
 jobs:
   release:
-    name: Release
+    name: Semver release
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
