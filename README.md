@@ -8,6 +8,8 @@
 
 [![GoDoc](https://godoc.org/github.com/jtbonhomme/gotp?status.svg)](https://godoc.org/github.com/jtbonhomme/gotp)
 
+![gopherbadger-tag-do-not-edit](https://github.com/jtbonhomme/gotp/blob/master/coverage_badge.png)
+
 Golang secure storage for your 2FA secret from your terminal.
 
 ![](gotp.png)
